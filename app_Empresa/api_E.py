@@ -17,17 +17,7 @@ class OnPremiseViewSet(viewsets.ModelViewSet):
 
 
 class SuscripcionViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet completo para CRUD de Suscripciones
     
-    Operaciones disponibles:
-    - GET /api/suscripcion/ - Listar todas las suscripciones
-    - POST /api/suscripcion/ - Crear nueva suscripción
-    - GET /api/suscripcion/{id}/ - Obtener suscripción específica
-    - PUT /api/suscripcion/{id}/ - Actualizar suscripción completa
-    - PATCH /api/suscripcion/{id}/ - Actualizar parcialmente suscripción
-    - DELETE /api/suscripcion/{id}/ - Eliminar suscripción
-    """
     queryset = Suscripcion.objects.all().select_related('empresa')
     serializer_class = SuscripcionSerializer
     permission_classes = [permissions.AllowAny]  # Cambiar según tus necesidades de autenticación

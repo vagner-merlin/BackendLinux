@@ -38,15 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework.authtoken',  # Para tokens de autenticación
+    'rest_framework.authtoken',
+    'corsheaders',
     'app_Cliente',
     'app_Credito',
     'app_Empresa',
     'app_User',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE = [  
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -148,3 +150,45 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.MultiPartParser',
     ],
 }
+
+# CORS Configuration para React Frontend
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React development server
+    "http://127.0.0.1:3000",
+    "http://localhost:5173",  # Vite development server  
+    "http://127.0.0.1:5173",
+    "http://localhost:8080",  # Otros puertos comunes
+    "http://127.0.0.1:8080",
+]
+
+# Para desarrollo - permite todos los orígenes (SOLO PARA DESARROLLO)
+CORS_ALLOW_ALL_ORIGINS = True  # Cambiar a False en producción
+
+# Headers permitidos
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+# Métodos HTTP permitidos
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+# Permitir cookies y credenciales
+CORS_ALLOW_CREDENTIALS = True
+
+# Preflight cache (opcional)
+CORS_PREFLIGHT_MAX_AGE = 86400
