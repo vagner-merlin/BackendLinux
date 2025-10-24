@@ -17,91 +17,10 @@ class OnPremiseViewSet(viewsets.ModelViewSet):
 
 
 class SuscripcionViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet completo para CRUD de Suscripciones
-    
-    Operaciones disponibles:
-    - GET /api/suscripcion/ - Listar todas las suscripciones
-    - POST /api/suscripcion/ - Crear nueva suscripción
-    - GET /api/suscripcion/{id}/ - Obtener suscripción específica
-    - PUT /api/suscripcion/{id}/ - Actualizar suscripción completa
-    - PATCH /api/suscripcion/{id}/ - Actualizar parcialmente suscripción
-    - DELETE /api/suscripcion/{id}/ - Eliminar suscripción
-    """
-    queryset = Suscripcion.objects.all().select_related('empresa')
+    queryset = Suscripcion.objects.all()
     serializer_class = SuscripcionSerializer
-    permission_classes = [permissions.AllowAny]  # Cambiar según tus necesidades de autenticación
-    
-    def get_queryset(self):
-        """Personalizar queryset - opcional: filtrar por empresa del usuario"""
-        queryset = Suscripcion.objects.all().select_related('empresa')
-        
-        # Opcional: Filtrar por empresa si se pasa como parámetro
-        empresa_id = self.request.query_params.get('empresa_id')
-        if empresa_id:
-            queryset = queryset.filter(empresa_id=empresa_id)
-            
-        # Opcional: Filtrar por estado
-        estado = self.request.query_params.get('estado')
-        if estado:
-            queryset = queryset.filter(enum_estado=estado)
-            
-        return queryset
-    
-    def create(self, request, *args, **kwargs):
-        """Personalizar creación de suscripción"""
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        
-        # Verificar si la empresa ya tiene una suscripción activa (opcional)
-        empresa_id = serializer.validated_data.get('empresa').id
-        suscripcion_activa = Suscripcion.objects.filter(
-            empresa_id=empresa_id, 
-            activo=True
-        ).exists()
-        
-        if suscripcion_activa:
-            return Response(
-                {'error': 'La empresa ya tiene una suscripción activa'}, 
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        
-        return Response(
-            {
-                'message': 'Suscripción creada exitosamente',
-                'data': serializer.data
-            }, 
-            status=status.HTTP_201_CREATED, 
-            headers=headers
-        )
-    
-    def update(self, request, *args, **kwargs):
-        """Personalizar actualización"""
-        partial = kwargs.pop('partial', False)
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=partial)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
-        
-        return Response(
-            {
-                'message': 'Suscripción actualizada exitosamente',
-                'data': serializer.data
-            }
-        )
-    
-    def destroy(self, request, *args, **kwargs):
-        """Personalizar eliminación"""
-        instance = self.get_object()
-        self.perform_destroy(instance)
-        
-        return Response(
-            {'message': 'Suscripción eliminada exitosamente'}, 
-            status=status.HTTP_200_OK
-        )
+    permission_classes = [permissions.AllowAny]
+
 
 class RegisterView(APIView):
     """
