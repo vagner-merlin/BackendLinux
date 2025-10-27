@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'Raiz_Project.wsgi.application'
 DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'saasproject',
+            'NAME': 'postgres',
             'USER': 'postgres',
-            'PASSWORD': 'postgres',
+            'PASSWORD': 'adminn',
             'HOST': 'localhost',
-            'PORT': '5433',
+            'PORT': '5432',
         }
 }
 

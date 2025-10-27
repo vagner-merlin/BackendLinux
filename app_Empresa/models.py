@@ -53,5 +53,5 @@ class on_premise(models.Model):
     email_contacto = models.EmailField()
     version = models.CharField(max_length=50)
     fecha_instalacion = models.DateTimeField(auto_now_add=True)
-    fecha_de_compra = models.DateTimeField()
+    fecha_de_compra = models.DateTimeField(auto_now_add=True)
     fecha_sin_soporte = models.DateTimeField()

@@ -5,11 +5,11 @@ services:
     image: postgres
     container_name: postgres-container
     ports:
-      - "5433:5432"
+      - "5435:5432"
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: adminn
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
