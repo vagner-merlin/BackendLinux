@@ -1,9 +1,14 @@
-from app_Empresa.serializers import EmpresaSerializer, RegisterEmpresaUserSerializer, LoginSerializer, LogoutSerializer, SuscripcionSerializer , OnPremiseSerializer
+from app_Empresa.serializers import EmpresaSerializer, RegisterEmpresaUserSerializer, LoginSerializer, LogoutSerializer, SuscripcionSerializer , OnPremiseSerializer , ConfiguracionSerializer
 from rest_framework import viewsets, permissions, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser, FormParser, MultiPartParser
-from app_Empresa.models import Empresa, Suscripcion , on_premise
+from app_Empresa.models import Empresa, Suscripcion , on_premise , Configuracion
+
+class ConfiguracionViewSet(viewsets.ModelViewSet):
+    queryset = Configuracion.objects.all()
+    serializer_class = ConfiguracionSerializer
+    permission_classes = [permissions.AllowAny]
 
 class EmpresaViewSet(viewsets.ModelViewSet):
     queryset = Empresa.objects.all()

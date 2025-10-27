@@ -9,6 +9,14 @@ from django.db import transaction
 from django.contrib.auth import authenticate
 from datetime import timedelta
 from django.utils import timezone
+from .models import Configuracion 
+
+class ConfiguracionSerializer(ModelSerializer):
+    class Meta:
+        model = Configuracion
+        fields = '__all__'
+
+
 
 class EmpresaSerializer(ModelSerializer):
     class Meta:
