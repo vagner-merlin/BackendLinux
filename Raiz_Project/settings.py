@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',  # Para tokens de autenticación
+    'drf_spectacular',
     'app_Cliente',
     'app_Credito',
     'app_Empresa',
@@ -140,6 +141,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+    # Use drf-spectacular for the automatic OpenAPI schema generation
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
     ],
@@ -148,4 +151,13 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser',
     ],
+}
+
+# drf-spectacular settings
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'BackendLinux API',
+    'DESCRIPTION': 'Documentación automática de la API usando drf-spectacular',
+    'VERSION': '1.0.0',
+    # Opcional: ajustar cómo se muestran los tags, etc.
+    # 'SERVE_INCLUDE_SCHEMA': False,
 }

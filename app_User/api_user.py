@@ -3,6 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from .serializers import UserSerializers , GroupSerializers , PermissionSerializers , ContentTypeSerializers
 from rest_framework import viewsets , permissions, status
 from rest_framework.response import Response
+from drf_spectacular.utils import extend_schema
 
 
 
@@ -11,6 +12,7 @@ class UserViewSer(viewsets.ModelViewSet):
     serializer_class = UserSerializers
     permission_classes = [permissions.AllowAny]
 
+@extend_schema(tags=['Groups'])
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all().order_by("id")
     serializer_class = GroupSerializers
