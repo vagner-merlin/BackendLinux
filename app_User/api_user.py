@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User , Group , Permission
 from django.contrib.contenttypes.models import ContentType
+<<<<<<< HEAD
 from django.contrib.admin.models import LogEntry
 from .serializers import (
     UserSerializers , GroupSerializers , PermissionSerializers , ContentTypeSerializers,
@@ -17,6 +18,11 @@ except Exception:
         def _decorator(obj):
             return obj
         return _decorator
+=======
+from .serializers import UserSerializers , GroupSerializers , PermissionSerializers , ContentTypeSerializers
+from rest_framework import viewsets , permissions, status
+from rest_framework.response import Response
+>>>>>>> a7d45e8 (api crada correctamente)
 
 
 
@@ -25,7 +31,10 @@ class UserViewSer(viewsets.ModelViewSet):
     serializer_class = UserSerializers
     permission_classes = [permissions.AllowAny]
 
+<<<<<<< HEAD
 @extend_schema(tags=['Groups'])
+=======
+>>>>>>> a7d45e8 (api crada correctamente)
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all().order_by("id")
     serializer_class = GroupSerializers
