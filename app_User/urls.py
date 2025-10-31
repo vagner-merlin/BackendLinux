@@ -1,10 +1,7 @@
-from django.urls import include , path
+from django.urls import include, path
 from rest_framework import routers
-<<<<<<< HEAD
-from .api_user import UserViewSer , GroupViewSet , PermissionViewSer , ContentTypeViewSer, AdminLogViewSet
-=======
-from .api_user import UserViewSer , GroupViewSet , PermissionViewSer , ContentTypeViewSer
->>>>>>> a7d45e8 (api crada correctamente)
+from .api_user import UserViewSer, GroupViewSet, PermissionViewSer, ContentTypeViewSer, AdminLogViewSet
+
 
 router = routers.DefaultRouter()
 router.register(r'user', UserViewSer)
