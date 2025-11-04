@@ -60,6 +60,10 @@ class RegisterView(APIView):
                         'email': result['user'].email,
                         'date_joined': result['user'].date_joined,
                         'is_superuser': result['user'].is_superuser,
+                          'is_staff': result['user'].is_staff,  # ← AGREGAR ESTO
+                                  'empresa_id': result['perfil_user'].empresa.id,  # ← AGREGAR ESTO
++                        'empresa_nombre': result['empresa'].razon_social,  # ← AGREGAR ESTO
+                   
                     },
                     'perfil_user': {
                         'id': result['perfil_user'].id,
@@ -101,11 +105,16 @@ class LoginView(APIView):
                 response_data = {
                     'message': 'Login exitoso',
                     'token': result['token'],
-                    'user_id': result['user_id'],
-                    'email': result['email'],
-                    'is_superuser': result['is_superuser'],
-                    'empresa_id': result['empresa_id'],
-                    'empresa_nombre': result['empresa_nombre']
+                     'user': {
+                        'id': result['user_id'],
+                        'username': result.get('username', ''),
+                        'email': result['email'],
+                        'nombre_completo': result.get('nombre_completo', ''),
+                        'is_superuser': result['is_superuser'],
+                        'is_staff': result['is_staff'],
+                        'empresa_id': result['empresa_id'],
+                        'empresa_nombre': result['empresa_nombre'],
+                    }
                 }
                 
                 return Response(response_data, status=status.HTTP_200_OK)

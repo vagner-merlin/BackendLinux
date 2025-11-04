@@ -86,6 +86,7 @@ class RegisterEmpresaUserSerializer(Serializer):
     last_name = serializers.CharField(max_length=150)
     email = serializers.EmailField()
     
+    
     # Campo de Perfil de Usuario
     imagen_url_perfil = serializers.URLField(required=False, allow_blank=True, allow_null=True)
     
@@ -121,7 +122,7 @@ class RegisterEmpresaUserSerializer(Serializer):
             'first_name': validated_data['first_name'],
             'last_name': validated_data['last_name'],
             'email': validated_data['email'],
-            'is_superuser': True,
+            'is_superuser': False,
             'is_staff': True,
         }
         
@@ -197,8 +198,11 @@ class LoginSerializer(Serializer):
         return {
             'token': token.key,
             'user_id': user.id,
+            'username': user.username,
             'email': user.email,
+            'nombre_completo': f"{user.first_name} {user.last_name}".strip(),
             'is_superuser': user.is_superuser,
+            'is_staff': user.is_staff,
             'empresa_id': empresa_id,
             'empresa_nombre': empresa_nombre
         }
@@ -218,4 +222,5 @@ class LogoutSerializer(Serializer):
         token = validated_data['token']
         token.delete()
         return {'message': 'Logout exitoso'}
+
 
