@@ -2,10 +2,10 @@ name: tenants
 
 services:
   postgres:
-    image: postgres
+    image: postgres:15
     container_name: postgres-container
     ports:
-      - "5435:5432"
+      - "5434:5432"
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres

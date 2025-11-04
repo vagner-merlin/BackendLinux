@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'drf_spectacular',
+    'corsheaders',
     'app_Cliente',
     'app_Credito',
     'app_Empresa',
@@ -86,9 +87,9 @@ DATABASES = {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'postgres',
             'USER': 'postgres',
-            'PASSWORD': '7722794',
+            'PASSWORD': 'adminn',
             'HOST': 'localhost',
-            'PORT': '5432',
+            'PORT': '5434',
         }
 }
 
