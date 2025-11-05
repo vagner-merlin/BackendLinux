@@ -58,9 +58,108 @@ json ejemplo
 }
 --------------------------------------------------------------------------------------
 HU16 Registrar Creditos 
+http://127.0.0.1:8000/api/Creditos/creditos/
+HTTP crud 
+
+json ejemplo post 
+{
+    "Monto_Solicitado": 10000.00,
+    "enum_estado": "SOLICITADO",
+    "Numero_Cuotas": 12,
+    "Monto_Cuota": 916.67,
+    "Moneda": "USD",
+    "Tasa_Interes": 10.50,
+    "Monto_Pagar": 11000.00,
+    "empresa": 1,
+    "usuario": 1,
+    "cliente": 1,
+    "tipo_credito": 1,
+    "Fecha_Aprobacion": null,
+    "Fecha_Desembolso": null,
+    "Fecha_Finalizacion": null
+}
+este json pide el id de la empresa el id del usuario que registro y el id del cliente 
+
 --------------------------------------------------------------------------------------
 HU17 Creditos Disponibles 
+http://127.0.0.1:8000/api/Creditos/tipo-creditos/
+HTTP crud pero para este hu solo quiro que uses get ya que veras que creditos hay disponible 
+como para mostrar al cliente 
+
+json ejemplo usando get 
+[
+    {
+        "id": 1,
+        "nombre": "Crédito Personal",
+        "descripcion": "Crédito destinado a personas naturales con tasas preferenciales",
+        "monto_minimo": "1000.00",
+        "monto_maximo": "50000.00"
+    },
+    {
+        "id": 2,
+        "nombre": "Crédito Empresarial",
+        "descripcion": "Financiamiento para capital de trabajo y expansión",
+        "monto_minimo": "10000.00",
+        "monto_maximo": "200000.00"
+    }
+]
 --------------------------------------------------------------------------------------
 HU18 Flujos del credito 
+
+Contexto esta api es para el flujo de trabajo que al entrar aca primero mostrar un buscador que pida ci para 
+poder busccar y filtrar a traves de aquello 
+luego esta ruta 
+http://127.0.0.1:8000/api/Creditos/estado-credito/7845123/ ese numero es un ci ahi deberia ir el ci del cliente 
+
+[
+    {
+        "ci_cliente": "7845123",
+        "nombre_cliente": "Juan Carlos",
+        "apellido_cliente": "Pérez González",
+        "estado_credito": "SOLICITADO",
+        "monto": "10000.00",
+        "moneda": "USD",
+        "fecha_aprobacion": "2023-11-04"
+    }
+]
+te muestra algo asi caso contrario 
+{
+    "message": "No se encontraron créditos para el CI proporcionado"
+}
+ahora es importante la parte de estado de creditos porque igual tienes que mostrar lo visual para que se vea color 
+verde por donde va el credito si un caso encuentra el flujo del credito. lo llame asi 
+como mostrando por donde va el credito como en el figam veras una pagina donde esta todo aquello 
+lo explicado 
 --------------------------------------------------------------------------------------
 HU19 Consulta Historial 
+http://127.0.0.1:8000/api/Creditos/historial/ 
+HTTP get 
+
+esto usalo para la parte de ver hisrotiarl de creditos luego has un buscador 
+y dentro de ese buscador usaras otra ruta 
+que es para mostrar todo los historial a corde al ci del cliente 
+
+GET http://127.0.0.1:8000/api/Creditos/historial/7845123/
+es get pero le pasas el ci del cliente y te mostrar todo su hisorial tenes 2 get ahora 
+
+no tengo ejemplo de json pero de sql como lo raelice si 
+SELECT 
+    d.ci AS ci_cliente,
+    c.nombre AS nombre_cliente,
+    c.apellido AS apellido_cliente,
+    t.cargo AS cargo,
+    t.empresa AS empresa_trabajo,
+    t.salario AS salario,
+    cr."Monto_Solicitado" AS monto_prestamo,
+    cr."enum_estado" AS estado_prestamo,
+    cr."Moneda" AS moneda
+FROM 
+    "app_Cliente_cliente" c
+    LEFT JOIN "app_Cliente_documentacion" d ON d.id_cliente_id = c.id
+    LEFT JOIN "app_Cliente_trabajo" t ON t.id_cliente_id = c.id
+    LEFT JOIN "app_Credito_credito" cr ON cr.cliente_id = c.id
+ORDER BY 
+    c.nombre, cr."Fecha_Aprobacion" DESC; 
+
+esos capos luego del select son los campos que te mostrara
+-----------------------------------------------------------------------------------------
