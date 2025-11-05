@@ -1,0 +1,66 @@
+--------------------------------------------------------------------------------------
+
+SPRINT 3-> 
+
+--------------------------------------------------------------------------------------
+HU12 Registrar Cliente
+http://127.0.0.1:8000/api/Clientes/clientes
+HTTP crud 
+
+json ejemplo 
+{
+    "nombre": "Juan Carlos",
+    "apellido": "Pérez González",
+    "telefono": "+591 75757575",
+    "fecha_registro": "2023-11-04"
+}
+
+--------------------------------------------------------------------------------------
+HU13 Registrar Documentacion
+http://127.0.0.1:8000/api/Clientes/documentacion
+HTTP crud 
+
+json ejemplo 
+{
+    "ci": "7845123",
+    "documento_url": "https://storage.ejemplo.com/docs/ci-7845123.pdf",
+    "id_cliente": 1
+}
+(el usuario creado debes relacionarlo con docuemnto)
+--------------------------------------------------------------------------------------
+HU14 Registrar informacion del Trabajo del cliente
+http://127.0.0.1:8000/api/Clientes/trabajo
+HTTP post
+
+ejemplo json 
+{
+    "cargo": "Gerente Comercial",
+    "empresa": "Empresa XYZ S.A.",
+    "extracto_url": "https://storage.ejemplo.com/docs/extracto-bancario.pdf",
+    "salario": 5000.00,
+    "ubicacion": "Zona Sur, La Paz",
+    "descripcion": "Responsable del área comercial y desarrollo de nuevos negocios",
+    "id_cliente": 1
+}
+
+--------------------------------------------------------------------------------------
+HU15 Registrar Domicilio del cliente
+http://127.0.0.1:8000/api/Clientes/domicilios
+HTTP crud 
+
+json ejemplo 
+{
+    "descripcion": "Av. 6 de Agosto #1234, Edificio Torre Azul, Piso 5, Dpto 502",
+    "croquis_url": "https://storage.ejemplo.com/croquis/domicilio-123.jpg",
+    "es_propietario": true,
+    "numero_ref": "502-TA",
+    "id_cliente": 1
+}
+--------------------------------------------------------------------------------------
+HU16 Registrar Creditos 
+--------------------------------------------------------------------------------------
+HU17 Creditos Disponibles 
+--------------------------------------------------------------------------------------
+HU18 Flujos del credito 
+--------------------------------------------------------------------------------------
+HU19 Consulta Historial 
